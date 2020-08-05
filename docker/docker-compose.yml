@@ -1,0 +1,17 @@
+tradeshift-web:
+        build: ./docker-tomcat
+        ports:
+                - "8080:8080"
+        links:
+                - app-db
+
+tradeshift-db:
+        build: ./docker-db
+        expose:
+                - "3306"
+        volumes_from:
+                - tradeshift-db-data
+tradeshift-db-data:
+        image: mysql:latest
+        volumes:
+                - /var/lib/mysql/data
